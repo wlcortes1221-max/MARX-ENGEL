@@ -1,16 +1,33 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Marx Engel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Cor da barra do navegador -->
+  <meta name="theme-color" content="#000000">
+
 </head>
 
 <body>
 
-<div id="app"></div>
+<h1>Marx Engel 🚀</h1>
+<p>Seu site está funcionando no Netlify.</p>
 
-<script type="module" src="/src/main.js"></script>
+<a href="marx-engel-team.html">Equipe</a><br><br>
+<a href="marx-engel-supabase.html">Supabase</a>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+}
+</script>
 
 </body>
+
 </html>
