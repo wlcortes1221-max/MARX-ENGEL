@@ -431,38 +431,46 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Marx Engel">
+<link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-<!-- SCRIPT DE CONFIGURAÇÃO DA LOGO -->
-<script>
-  const MINHA_LOGO = "data:image/jpeg;base64,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";
-  
-  function atualizarTodasAsLogos() {
-    const imagens = document.querySelectorAll('img');
-    imagens.forEach(img => {
-      // Se for a imagem do logo da navegação, do hero, do loading ou do login
-      if (img.closest('.t-logo') || img.closest('.nav-logo') || img.closest('.hero-logo') || img.closest('.login-logo-wrap') || img.closest('.sb-logo')) {
-        img.src = MINHA_LOGO;
-      }
-    });
-  }
-</script>
+<!-- PWA INSTALL BANNER -->
+<div id="pwa-banner" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:200;background:var(--black-2);border:1px solid var(--gold);padding:12px 20px;align-items:center;gap:12px;max-width:320px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.6);">
+  <span style="font-size:24px;">📱</span>
+  <div style="flex:1">
+    <div style="font-size:12px;font-weight:600;color:var(--white);">Instalar como App</div>
+    <div style="font-size:10px;color:rgba(245,245,240,0.4);">Acesso rápido na tela inicial</div>
+  </div>
+  <button onclick="instalarPWA()" style="background:var(--gold);color:var(--black);border:none;padding:8px 14px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;">INSTALAR</button>
+  <button onclick="document.getElementById('pwa-banner').classList.remove('show')" style="background:none;border:none;color:rgba(245,245,240,0.3);font-size:18px;cursor:pointer;line-height:1;">✕</button>
+</div>
 
 <!-- TRANSITION OVERLAY -->
 <div id="t-overlay">
-  <div class="t-logo"><img src="" alt="MET"></div>
+  <div class="t-logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIVFRUVGBgVGBcVFxgVGBUWGBYWFhcXGBcYHSggGBolHRcVITEhJSkrLi4uFyEzODMtNygtLisBCgoKDg0OGxAQGi0lICUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAwUGBwECBAj/xABLEAACAQMBBAcDCgMECAUFAAABAgMABBEFBhIhMQcTIkFRYXGBkaEUIzIzQlJicrGyosHRFYKSwggkQ1Njc9LhFjTD8PEXJTVUg//EABsBAAEFAQEAAAAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0696T7W0S606PrpY+xP9H+vNfWue0PRLNHZ4tf6v6/0Ldt8ZryvYje0nSHe3t5LdXsnWxydleI9PbW9otBDTV9le3yQvUuXmZcfQv0xrfW/ya/f5Tdw/R9PCuZ6z0iV8u+rkWvUdss9rPPHSn0k3GqXPzi9Rcp82Bzz/AF8K6LpnTI6OPfXySajUTn/1T77L7Y3GkXKXunS9XcIe0/Hl9atWWRuj2T2Kz7/NAtvpo6ZItTsVj01PlNz9/wAOf6isvo3Rv5ff3V+3JLqr/EiVj0S9KM2kXBkuU+UtN2U9D/3Faer0juhicmRytzHCSLH6VOmeTVoFt9Mk+Uyp2ZPw/pXP6DoUNLZ4tfKLFmp8mI/p7EM6JOkp9KuTdaUnXTyfZ8/5itnW6GGph2fJHZfKMe+RPOmXpfl1WBYrNPlT8H8vH9Kp9K6MuncfX6v+ETrU9scxIn0Q9L0ulT9ZfRdbFLwYfBfxE8O6tfUaPw9S9SthstT3R2LL6UumWXVrcR6enyt+74H9awOn9Fp0tnm3f0JW7F57H7FD6tqc99MZ71vknWfSz99966WqKgu2BTuus78yO3Z7amfUrhJrx+tS37XoeYpY1qKxFCSm8dy3ZYXSh00PqlutvYv8mRPp+D96+WfPvrI6f0N6W7x7OS9bqZTXmKy6PekW4065S4vJOulXseGfPy9K0+oaGGur8GrZf5K9N0q8t8Fz9MvTMdUthHaSdbdfY+D8/1Fcz0noS6fNuCyy7bqYyisv3I9s704XWn6ckGnS/KL77z/rXW36V2YjJ7FDTRUHmTyVhtjt7fanc9dqEvyqRPpff9T48M1V0PTa9FX4NfDNDUaiM37Fp9CvSxLpUPVXyddHLwbw9f9+NYXUOiy1f5ceUTPU+Kuz6EH6WdsIdTv2vNOm6mRPoeh8j5Vp9I6V+Aq8S3krSjPST73uWn0L9MyXkLDUX+TS8I297f0rn9d0N6u78VXuicmF0k7d3OqXCz6fJ8mlX6f3h51uaPTfgoYpXBHmUuS39hekFbqxaLSB8tvG4uPDPhXGdS6PLUXeNqclyF0u7EiA9MXSz8uj+RajH1U30PJv611Gi0C06/L9Of9itfTnyogPRn0oyaVciWzT5VHJxkH8/CtP8N+IrdNm6Y/qXvC4L16QOnBtTtEhsk66V+EknBvDPD0765TQfw49Lf307Iu6jURfG5X3RX0uPpd6Wuk+UrLwb8Hj6+tb+v0H4quVdtmF+xndS1XjS8m5YnSh05rqMCwaZJ10p7fgeHkaxem/w3Z0+zxKOWWfxfisqPa/b+61K4WW+k66KP6Hkf+9X9L0f8Lb4tXIs9R5C9tN0h9L9xe2ix6bL8mnh7RHgfP099Z2i6FDS2eLHklsq8vY/YmXRh00fL9PeHVH6m+TtfyYfGqXVf4fWqu8SvYmru7Y8ED6WulafU7hZdNk6mSLgeRHz9K1NLpvw8fNyyvOfm7mSfok6Z5tNuRLfv18bcG9mOPh4Vm9U6UtZDwq9mTV3yUsssrpf6ZxqUKW2mv10UnFvzPwY8Kwem/w3BT299m6LFmqjLzMrPYjbO50q6SfTpOsdfofkfyrstTpK9XX4NfDIfF7vLIsnpQ6YTrMCQWqdRfLxby5HyrB6X0GXTp98eCaxqEe2JH9kOlS40+8SfTpOueP6f83n+9XNd0mvW1+F7f6K9N0q8t8lydKfTX8ttETTU66aT6X3vIedcl0z+HJ6Cz8x5RfV/hLsiUds7tnf6fcNcadL10z8H8/OtLqHToauvwNUnXWvYp2Ssqfm3LH6NOnCbSp+t1OTrpJO0PHz/AKVX/l8dNThcI0pamp14fJLulfpnh1W2WLTH+TRpwbwfx/lWV0/oj6fPvo9vj29hXqe9YkWp0N9MyaZaiC6Xr5E4+Wf8+FdXfoqdY/E1HoL0rUvEvch" alt="MET"></div>
   <div class="t-text">MARX ENGEL TEAM</div>
   <div class="t-bar"><div class="t-bar-fill" id="t-bar-fill"></div></div>
 </div>
 
+<!-- NOTIFICATION -->
 <div id="notif"><span id="notif-text"></span></div>
+
+<!-- MOBILE MENU (landing) -->
+<div id="mob-menu" style="display:none;position:fixed;inset:0;background:var(--black);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;">
+  <button onclick="closeMobMenu()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--gold);font-size:26px;cursor:pointer;line-height:1;">✕</button>
+  <img src="data:image/jpeg;base64,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" style="width:72px;height:72px;border-radius:50%;border:2px solid var(--gold);" alt="MET">
+  <a onclick="mobScroll('sobre')" style="font-family:'Cinzel',serif;font-size:20px;color:var(--white);cursor:pointer;letter-spacing:3px;">SOBRE</a>
+  <a onclick="mobScroll('modalidades')" style="font-family:'Cinzel',serif;font-size:20px;color:var(--white);cursor:pointer;letter-spacing:3px;">MODALIDADES</a>
+  <a onclick="mobScroll('horarios')" style="font-family:'Cinzel',serif;font-size:20px;color:var(--white);cursor:pointer;letter-spacing:3px;">HORÁRIOS</a>
+  <button class="btn-solid" onclick="showPage('page-login');closeMobMenu();">ÁREA DO ALUNO</button>
+</div>
 
 <!-- ==================== LANDING ==================== -->
 <div id="page-landing" class="page active">
   <nav class="nav">
     <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <img src="" alt="MET">
+      <img src="data:image/jpeg;base64,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" alt="MET">
       <div class="nav-logo-text">Marx Engel<br>Team</div>
     </div>
     <div class="nav-links">
@@ -471,14 +479,8 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
       <a onclick="document.getElementById('horarios').scrollIntoView({behavior:'smooth'})">Horários</a>
     </div>
     <button class="btn-gold" onclick="showPage('page-login')">Área do Aluno</button>
-    <button class="ham" onclick="document.getElementById('mob-menu').classList.toggle('active')"><span></span><span></span><span></span></button>
+    <button class="ham" onclick="openMobMenu()"><span></span><span></span><span></span></button>
   </nav>
-
-  <div id="mob-menu">
-      <button style="position:absolute;top:20px;right:20px;background:none;border:none;color:var(--gold);font-size:30px;" onclick="this.parentElement.classList.remove('active')">✕</button>
-      <a onclick="showPage('page-landing'); document.getElementById('mob-menu').classList.remove('active')">INÍCIO</a>
-      <a onclick="showPage('page-login'); document.getElementById('mob-menu').classList.remove('active')">ÁREA DO ALUNO</a>
-  </div>
 
   <section class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div>
@@ -487,67 +489,120 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
         <div class="hero-eyebrow">Fundada com Honra</div>
         <div class="hero-title">MARX<br><span>ENGEL</span><br>TEAM</div>
         <div class="hero-sub">Brazilian Jiu-Jitsu</div>
-        <p class="hero-desc">Mais do que uma academia — uma família. Treinamos juntos, evoluímos juntos.</p>
-        <button class="btn-solid" onclick="showPage('page-login')">ÁREA DO ALUNO</button>
+        <p class="hero-desc">Mais do que uma academia — uma família. Treinamos juntos, evoluímos juntos. Venha descobrir o poder transformador do jiu-jitsu.</p>
+        <div class="hero-cta">
+          <button class="btn-solid" onclick="document.getElementById('sobre').scrollIntoView({behavior:'smooth'})">Conheça a Academia</button>
+          <button style="background:none;border:none;color:var(--white);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;" onclick="showPage('page-login')">Área do Aluno <span style="color:var(--gold);font-size:16px;">→</span></button>
+        </div>
       </div>
-      <div class="hero-logo"><img src="" alt="Marx Engel Team"></div>
+      <div class="hero-logo"><img class="logo-source" src="" alt="Marx Engel Team"></div>
     </div>
   </section>
-  <!-- O restante das seções (stats, sobre, etc) viriam aqui se você as mantivesse -->
+
+  <div style="background:var(--black-2);">
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="stat-alunos">—</div><div class="stat-label">Alunos Ativos</div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">Anos de Tradição</div></div>
+      <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Medalhas</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Faixas Pretas</div></div>
+    </div>
+  </div>
+
+  <section class="section" id="sobre">
+    <div class="sec-label">Sobre nós</div>
+    <div class="sec-title">UMA ESCOLA DE <span>VIDA</span></div>
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <p>A Marx Engel Team nasceu com um propósito claro: formar não apenas atletas, mas seres humanos melhores. O jiu-jitsu é nosso veículo de transformação.</p>
+        <p>Com professores altamente qualificados e um ambiente acolhedor, oferecemos treinamento para todos os níveis — do iniciante ao competidor de elite.</p>
+      </div>
+      <div class="sobre-cards">
+        <div class="s-card"><div class="s-card-icon">🥋</div><div class="s-card-title">Técnica</div><div class="s-card-text">Ensino metodológico e progressivo.</div></div>
+        <div class="s-card"><div class="s-card-icon">🏆</div><div class="s-card-title">Competição</div><div class="s-card-text">Preparação para campeonatos.</div></div>
+        <div class="s-card"><div class="s-card-icon">👨‍👩‍👧‍👦</div><div class="s-card-title">Família</div><div class="s-card-text">Comunidade unida e valores fortes.</div></div>
+        <div class="s-card"><div class="s-card-icon">💪</div><div class="s-card-title">Condicionamento</div><div class="s-card-text">Treinos físicos complementares.</div></div>
+      </div>
+    </div>
+  </section>
+  <!-- ... Adicione as outras seções aqui se desejar ... -->
 </div>
 
 <!-- ==================== LOGIN ==================== -->
 <div id="page-login" class="page">
   <div class="login-box">
     <div class="login-logo-wrap">
-      <img src="" alt="MET">
+      <img class="logo-source" src="" alt="MET">
       <div class="login-brand">MARX ENGEL TEAM</div>
     </div>
     <div class="login-title">ENTRAR</div>
-    <div class="fgroup"><label class="flabel">E-mail</label><input type="email" class="finput" id="l-email"></div>
-    <div class="fgroup"><label class="flabel">Senha</label><input type="password" class="finput" id="l-senha"></div>
-    <button class="btn-full" onclick="alert('Login simulado')">ACESSAR</button>
+    <div class="login-sub">Área restrita — alunos e professores</div>
+    <div class="fgroup"><label class="flabel">E-mail</label><input type="email" class="finput" id="l-email" placeholder="seu@email.com"></div>
+    <div class="fgroup"><label class="flabel">Senha</label><input type="password" class="finput" id="l-senha" placeholder="••••••••"></div>
+    <button class="btn-full" id="btn-entrar" onclick="fazerLogin()">ACESSAR SISTEMA</button>
     <span class="login-back" onclick="showPage('page-landing')">← Voltar ao site</span>
   </div>
 </div>
 
-<script>
-// LÓGICA DE NAVEGAÇÃO
-function showPage(id) {
-  const overlay = document.getElementById('t-overlay');
-  overlay.style.opacity = '1';
-  overlay.style.pointerEvents = 'all';
-  overlay.classList.remove('hide');
+<!-- ==================== DASHBOARDS (Simplificado para o exemplo) ==================== -->
+<div id="page-aluno" class="page">
+  <div class="sidebar">
+    <div class="sb-logo"><img class="logo-source" src="" alt="MET"><div class="sb-logo-text">MARX ENGEL</div></div>
+    <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+  </div>
+  <div class="dash-main"><h1>Painel Aluno</h1></div>
+</div>
 
-  setTimeout(() => {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    
-    setTimeout(() => {
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
-      overlay.classList.add('hide');
-    }, 600);
-  }, 400);
+<script>
+// IMAGEM QUE VOCÊ ENVIOU
+const LOGO_DATA = "data:image/jpeg;base64,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";
+
+function setLogos() {
+  document.querySelectorAll('img').forEach(img => {
+    // Procura por imagens que tenham classes de logo ou estejam dentro de contêineres de logo
+    if (img.classList.contains('logo-source') || 
+        img.closest('.t-logo') || 
+        img.closest('.nav-logo') || 
+        img.closest('.login-logo-wrap') || 
+        img.closest('.sb-logo')) {
+      img.src = LOGO_DATA;
+    }
+  });
 }
 
-// INICIALIZAÇÃO
-window.addEventListener('DOMContentLoaded', () => {
-    atualizarTodasAsLogos();
-    const bar = document.getElementById('t-bar-fill');
-    if(bar) bar.style.width = '100%';
-    
-    // Mostra o overlay de entrada e remove após 1.5s
-    const overlay = document.getElementById('t-overlay');
-    overlay.style.opacity = '1';
-    overlay.classList.add('show');
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(id);
+  if(target) target.classList.add('active');
+  window.scrollTo(0,0);
+}
 
-    setTimeout(() => {
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
-      overlay.classList.add('hide');
-    }, 1500);
+function openMobMenu() {
+  document.getElementById('mob-menu').style.display = 'flex';
+}
+
+function closeMobMenu() {
+  document.getElementById('mob-menu').style.display = 'none';
+}
+
+// Inicialização
+window.addEventListener('DOMContentLoaded', () => {
+  setLogos();
+  
+  // Animação da barra de loading
+  const fill = document.getElementById('t-bar-fill');
+  if(fill) fill.style.width = '100%';
+  
+  // Esconder overlay após carregar
+  setTimeout(() => {
+    const overlay = document.getElementById('t-overlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.classList.add('hide'), 500);
+  }, 1000);
 });
+
+// Funções de login/logout fictícias para o funcionamento da troca de telas
+function fazerLogin() { showPage('page-aluno'); }
+function fazerLogout() { showPage('page-landing'); }
 </script>
 
 </body>
