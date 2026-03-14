@@ -333,7 +333,7 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
 .grad-meta{font-size:10px;color:rgba(245,245,240,0.35);}
 .grad-actions{display:flex;gap:8px;flex-shrink:0;}
 
-/* CORRIGIDO: PWA banner sem display:none inline — controlado pelo CSS */
+/* PWA banner */
 #pwa-banner{display:none;}
 #pwa-banner.show{display:flex;}
 
@@ -428,14 +428,10 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
 </style>
 
 <meta name="theme-color" content="#0a0a0a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Marx Engel">
-<link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-<!-- PWA INSTALL BANNER — CORRIGIDO: sem style display inline, controlado pelo CSS -->
+<!-- PWA INSTALL BANNER -->
 <div id="pwa-banner" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:200;background:var(--black-2);border:1px solid var(--gold);padding:12px 20px;align-items:center;gap:12px;max-width:320px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.6);">
   <span style="font-size:24px;">📱</span>
   <div style="flex:1">
@@ -446,31 +442,11 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
   <button onclick="document.getElementById('pwa-banner').classList.remove('show')" style="background:none;border:none;color:rgba(245,245,240,0.3);font-size:18px;cursor:pointer;line-height:1;">✕</button>
 </div>
 
-<!-- TRANSITION OVERLAY -->
-<div id="t-overlay">
-  <div class="t-logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)"></div>
-  <div class="t-text">MARX ENGEL TEAM</div>
-  <div class="t-bar"><div class="t-bar-fill" id="t-bar-fill"></div></div>
-</div>
-
-<!-- NOTIFICATION -->
-<div id="notif"><span id="notif-text"></span></div>
-
-<!-- MOBILE MENU (landing) -->
-<div id="mob-menu" style="display:none;position:fixed;inset:0;background:var(--black);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;">
-  <button onclick="closeMobMenu()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--gold);font-size:26px;cursor:pointer;line-height:1;">✕</button>
-  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/AAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)" style="width:72px;height:72px;border-radius:50%;border:2px solid var(--gold);" alt="MET">
-  <a onclick="mobScroll('sobre')" style="font-family:'Cinzel',serif;font-size:20px;color:var(--white);cursor:pointer;letter-spacing:3px;">SOBRE</a>
-  <a onclick="mobScroll('modalidades')" style="font-family:'Cinzel',serif;font-size:20px;color:var(--white);cursor:pointer;letter-spacing:3px;">MODALIDADES</a>
-  <a onclick="mobScroll('horarios')" style="font-family:'Cinzel',serif;font-size:20px;color:var(--white);cursor:pointer;letter-spacing:3px;">HORÁRIOS</a>
-  <button class="btn-solid" onclick="showPage('page-login');closeMobMenu();">ÁREA DO ALUNO</button>
-</div>
-
 <!-- ==================== LANDING ==================== -->
-<div id="page-landing" class="page">
+<div id="page-landing" class="page active">
   <nav class="nav">
     <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)" alt="MET">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (PEGUE O RESTO DO SEU CODIGO BASE64 E COLE AQUI)" alt="MET">
       <div class="nav-logo-text">Marx Engel<br>Team</div>
     </div>
     <div class="nav-links">
@@ -495,215 +471,61 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
           <button style="background:none;border:none;color:var(--white);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;" onclick="showPage('page-login')">Área do Aluno <span style="color:var(--gold);font-size:16px;">→</span></button>
         </div>
       </div>
-      <div class="hero-logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)" alt="Marx Engel Team"></div>
+      <div class="hero-logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (COLE O MESMO BASE64 AQUI)" alt="Marx Engel Team"></div>
     </div>
   </section>
-
-  <div style="background:var(--black-2);">
-    <div class="stats">
-      <div class="stat"><div class="stat-num" id="stat-alunos">—</div><div class="stat-label">Alunos Ativos</div></div>
-      <div class="stat"><div class="stat-num">12</div><div class="stat-label">Anos de Tradição</div></div>
-      <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Medalhas</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Faixas Pretas</div></div>
-    </div>
-  </div>
-
-  <section class="section" id="sobre">
-    <div class="sec-label">Sobre nós</div>
-    <div class="sec-title">UMA ESCOLA DE <span>VIDA</span></div>
-    <div class="sobre-grid">
-      <div class="sobre-text">
-        <p>A Marx Engel Team nasceu com um propósito claro: formar não apenas atletas, mas seres humanos melhores. O jiu-jitsu é nosso veículo de transformação.</p>
-        <p>Com professores altamente qualificados e um ambiente acolhedor, oferecemos treinamento para todos os níveis — do iniciante ao competidor de elite.</p>
-      </div>
-      <div class="sobre-cards">
-        <div class="s-card"><div class="s-card-icon">🥋</div><div class="s-card-title">Técnica</div><div class="s-card-text">Ensino metodológico e progressivo.</div></div>
-        <div class="s-card"><div class="s-card-icon">🏆</div><div class="s-card-title">Competição</div><div class="s-card-text">Preparação para campeonatos.</div></div>
-        <div class="s-card"><div class="s-card-icon">👨‍👩‍👧‍👦</div><div class="s-card-title">Família</div><div class="s-card-text">Comunidade unida e valores fortes.</div></div>
-        <div class="s-card"><div class="s-card-icon">💪</div><div class="s-card-title">Condicionamento</div><div class="s-card-text">Treinos físicos complementares.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="modalidades" style="padding:80px 0;background:var(--black-2);">
-    <div class="section" style="padding:0 60px;">
-      <div class="sec-label">O que oferecemos</div>
-      <div class="sec-title">NOSSAS <span>MODALIDADES</span></div>
-      <div class="mod-grid">
-        <div class="mod-card"><div class="mod-icon">🥋</div><div class="mod-title">Jiu-Jitsu Adulto</div><div class="mod-desc">Treinamento completo para todos os níveis.</div></div>
-        <div class="mod-card"><div class="mod-icon">👶</div><div class="mod-title">Jiu-Jitsu Infantil</div><div class="mod-desc">Programa especial para crianças de 4 a 12 anos.</div></div>
-        <div class="mod-card"><div class="mod-icon">🤸</div><div class="mod-title">Jiu-Jitsu Teen</div><div class="mod-desc">Turmas exclusivas para adolescentes.</div></div>
-        <div class="mod-card"><div class="mod-icon">🔥</div><div class="mod-title">Submission Grappling</div><div class="mod-desc">Treino sem kimono.</div></div>
-        <div class="mod-card"><div class="mod-icon">⚡</div><div class="mod-title">Condicionamento</div><div class="mod-desc">Preparação física para lutadores.</div></div>
-        <div class="mod-card"><div class="mod-icon">🏅</div><div class="mod-title">Equipe Competição</div><div class="mod-desc">Grupo preparado para campeonatos.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="horarios">
-    <div class="sec-label">Agenda</div>
-    <div class="sec-title">HORÁRIOS <span>DAS AULAS</span></div>
-    <table class="hor-table">
-      <thead><tr><th>Dia</th><th>Horário</th><th>Modalidade</th><th>Professor</th><th>Nível</th></tr></thead>
-      <tbody>
-        <tr><td>Segunda</td><td>07h00</td><td>Jiu-Jitsu Adulto</td><td>Prof. Marx</td><td><span class="bnivel all">Todos</span></td></tr>
-        <tr><td>Segunda</td><td>19h00</td><td>Jiu-Jitsu Adulto</td><td>Prof. Marx</td><td><span class="bnivel ini">Iniciante</span></td></tr>
-        <tr><td>Terça</td><td>18h30</td><td>Infantil/Teen</td><td>Prof. Engel</td><td><span class="bnivel all">Todos</span></td></tr>
-        <tr><td>Quarta</td><td>07h00</td><td>Submission</td><td>Prof. Marx</td><td><span class="bnivel mid">Intermediário</span></td></tr>
-        <tr><td>Quarta</td><td>20h00</td><td>Jiu-Jitsu Adulto</td><td>Prof. Marx</td><td><span class="bnivel adv">Avançado</span></td></tr>
-        <tr><td>Quinta</td><td>18h30</td><td>Teen</td><td>Prof. Engel</td><td><span class="bnivel all">Todos</span></td></tr>
-        <tr><td>Sexta</td><td>19h00</td><td>Jiu-Jitsu Adulto</td><td>Prof. Engel</td><td><span class="bnivel ini">Iniciante</span></td></tr>
-        <tr><td>Sábado</td><td>09h00</td><td>Treino Livre</td><td>Prof. Marx</td><td><span class="bnivel adv">Avançado</span></td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <div class="cta-sec">
-    <div class="sec-label" style="justify-content:center;">Faça parte</div>
-    <div class="sec-title" style="margin-bottom:16px;">COMECE SUA <span>JORNADA</span></div>
-    <p style="color:rgba(245,245,240,0.45);font-size:14px;max-width:440px;margin:0 auto 36px;line-height:1.8;">A primeira aula é por nossa conta.</p>
-    <button class="btn-solid" onclick="showPage('page-login')">Área do Aluno</button>
-  </div>
-  <footer>
-    <div class="foot-copy">© 2025 Marx Engel Team. Todos os direitos reservados.</div>
-    <div class="foot-brand">BRAZILIAN JIU-JITSU</div>
-  </footer>
 </div>
 
 <!-- ==================== LOGIN ==================== -->
 <div id="page-login" class="page">
   <div class="login-box">
     <div class="login-logo-wrap">
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)" alt="MET">
-      <div class="login-brand">MARX ENGEL TEAM</div>
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (COLE O MESMO BASE64 AQUI)" alt="Logo">
     </div>
     <div class="login-title">ENTRAR</div>
-    <div class="login-sub">Área restrita — alunos e professores</div>
-    <div class="fgroup"><label class="flabel">E-mail</label><input type="email" class="finput" id="l-email" placeholder="seu@email.com" autocomplete="email"></div>
-    <div class="fgroup"><label class="flabel">Senha</label><input type="password" class="finput" id="l-senha" placeholder="••••••••" autocomplete="current-password"></div>
-    <button class="btn-full" id="btn-entrar" onclick="fazerLogin()">ACESSAR SISTEMA</button>
-    <div class="login-err" id="l-err">E-mail ou senha incorretos.</div>
-    <span class="login-back" onclick="showPage('page-landing')">← Voltar ao site</span>
+    <div class="fgroup"><input type="email" class="finput" id="l-email" placeholder="E-mail"></div>
+    <div class="fgroup"><input type="password" class="finput" id="l-senha" placeholder="Senha"></div>
+    <button class="btn-full" onclick="fazerLogin()">ACESSAR</button>
+    <span class="login-back" onclick="showPage('page-landing')">← Voltar</span>
   </div>
-</div>
-
-<!-- ==================== DASHBOARD ALUNO ==================== -->
-<div id="page-aluno" class="page">
-  <div class="sb-overlay" id="ov-aluno" onclick="closeSB('aluno')"></div>
-  <div class="mob-top" id="mt-aluno">
-    <button class="ham" id="ham-aluno" onclick="toggleSB('aluno')"><span></span><span></span><span></span></button>
-    <span class="mob-top-title">MARX ENGEL</span>
-    <div style="width:36px"></div>
-  </div>
-  <div class="sidebar" id="sb-aluno">
-    <div class="sb-logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)" alt="MET"><div class="sb-logo-text">MARX ENGEL</div></div>
-    <nav class="sb-nav">
-      <div class="sb-section">Principal</div>
-      <div class="sb-item active" onclick="goView('aluno','overview',this)"><span class="sb-icon">⊞</span>Visão Geral</div>
-      <div class="sb-item" onclick="goView('aluno','checkin',this)"><span class="sb-icon">✅</span>Check-in</div>
-      <div class="sb-section">Meu Perfil</div>
-      <div class="sb-item" onclick="goView('aluno','freq',this)"><span class="sb-icon">📊</span>Frequência</div>
-      <div class="sb-item" onclick="goView('aluno','mens',this)"><span class="sb-icon">💳</span>Mensalidade</div>
-      <div class="sb-item" onclick="goView('aluno','rank',this)"><span class="sb-icon">🏆</span>Ranking</div>
-      <div class="sb-item" onclick="goView('aluno','agenda',this)"><span class="sb-icon">📅</span>Agenda</div>
-      <div class="sb-item" onclick="goView('aluno','grad',this)"><span class="sb-icon">🎯</span>Graduação</div>
-      <div class="sb-item" onclick="goView('aluno','chat',this);loadChat('aluno')"><span class="sb-icon">💬</span>Mensagens</div>
-    </nav>
-    <div class="sb-foot">
-      <div class="u-info">
-        <div class="avatar-wrap" onclick="document.getElementById('upload-foto-aluno').click()" title="Trocar foto">
-          <div class="avatar-initials" id="a-avatar-initials">?</div>
-          <img id="a-avatar-img" style="display:none;width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;">
-          <div class="avatar-edit">✏️</div>
-          <input type="file" id="upload-foto-aluno" class="avatar-upload-input" accept="image/*" onchange="uploadFoto(this,'aluno')">
-        </div>
-        <div><div class="u-name" id="a-nome">—</div><div class="u-role" id="a-faixa">Aluno</div></div>
-      </div>
-      <button class="btn-logout" onclick="fazerLogout()">Sair</button>
-    </div>
-  </div>
-  <!-- ... restante do código original igual ... -->
-  <div class="mob-bot">
-    <div class="mob-bot-items">
-      <div class="mob-bot-item active" id="mb-a-0" onclick="mobNav('aluno','overview',0)"><span class="mob-bot-icon">⊞</span>Início</div>
-      <div class="mob-bot-item" id="mb-a-1" onclick="mobNav('aluno','checkin',1)"><span class="mob-bot-icon">✅</span>Check-in</div>
-      <div class="mob-bot-item" id="mb-a-2" onclick="mobNav('aluno','freq',2)"><span class="mob-bot-icon">📊</span>Freq.</div>
-      <div class="mob-bot-item" id="mb-a-3" onclick="mobNav('aluno','mens',3)"><span class="mob-bot-icon">💳</span>Mensalid.</div>
-      <div class="mob-bot-item" id="mb-a-4" onclick="mobNav('aluno','agenda',4)"><span class="mob-bot-icon">📅</span>Agenda</div>
-    </div>
-  </div>
-
-  <div class="dash-main">
-    <div id="aluno-overview" class="dview active">
-        <!-- O conteúdo aqui deve ser o seu original -->
-        <div class="dash-head">
-            <div><div class="dash-title">OLÁ, <span id="a-first">ALUNO</span> 👊</div><div class="dash-date" id="d-date"></div></div>
-          </div>
-          <div class="cards">
-            <div class="card"><div class="card-lbl">Aulas este mês</div><div class="card-val g" id="c-aulas-mes">—</div><div class="card-sub">mês atual</div><div class="card-bg">🥋</div></div>
-            <div class="card"><div class="card-lbl">Total de aulas</div><div class="card-val" id="c-total">—</div><div class="card-sub">desde o início</div><div class="card-bg">📊</div></div>
-            <div class="card"><div class="card-lbl">Ranking</div><div class="card-val g" id="c-rank">#—</div><div class="card-sub">por frequência</div><div class="card-bg">🏆</div></div>
-            <div class="card"><div class="card-lbl">Mensalidade</div><div class="card-val gr" id="c-mens-st">—</div><div class="card-sub" id="c-mens-sub">verificando...</div><div class="card-bg">💳</div></div>
-          </div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== DASHBOARD PROFESSOR ==================== -->
-<div id="page-professor" class="page">
-    <div class="sidebar" id="sb-prof">
-        <div class="sb-logo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGgA9QDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAQFBgcDAggB/8QAVhAAAAUCAgcFBQYCBgYGCAcAAAECAwQFEQbSEhMUFSFUlDFTkZPRByJBUZIyNVVhc7IjgRYXM1JxsSRCVmKk0wg0NkNysxhEZHR1gqHwJSc3g6PBw//EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAA6EQEAAgADBAoBAgMHBQEAAAAAARECIfAxQaHRAxJRYXGBkbHB4QQi0lKSwgUTFBVT4vEjMkJionL/2g/+0... (resto do base64)" alt="MET"><div class="sb-logo-text">MARX ENGEL</div></div>
-        <!-- Resto da sidebar... -->
-    </div>
 </div>
 
 <script>
-// Mantive todo o seu código JS intacto abaixo
-const { createClient } = supabase;
-const db = createClient(
-  'https://rwkdppwvkvydoltalimc.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3a2RwcHd2a3Z5ZG9sdGFsaW1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5ODY2NDgsImV4cCI6MjA4ODU2MjY0OH0.CdMe5RCXADM66SOGNp3WoSM_EFP9gWyAdBB4SPos7k0'
-);
-
-let cUser = null, cProfile = null;
-
-const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : '';
-const fmtDate = s => { if(!s) return '—'; const [y,m,d]=s.split('-'); return d+'/'+m+'/'+y; };
-const hoje = () => new Date().toISOString().split('T')[0];
-
-function showOverlay() {
-  const o = document.getElementById('t-overlay');
-  if(o) o.classList.add('show');
-}
-function hideOverlay() {
-  const o = document.getElementById('t-overlay');
-  if(o) o.classList.remove('show');
-}
-
+// Lógica de Troca de Páginas (Original)
 function showPage(id) {
-    document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
-    const t=document.getElementById(id);
-    if(t) {
-        t.style.display='block'; 
-        t.classList.add('active');
-    }
-}
-
-// INICIALIZAÇÃO PARA GARANTIR QUE A LANDING APAREÇA SE NÃO HOUVER SESSÃO
-async function init() {
-  showOverlay();
-  const {data:{session}}=await db.auth.getSession();
-  if(session){
-    await loadProfile(session.user);
-  } else {
-    showPage('page-landing');
-    hideOverlay();
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  const target = document.getElementById(id);
+  if(target) {
+    target.classList.add('active');
+    target.style.display = 'block';
   }
 }
+
+// Lógica do Overlay de Carregamento
+window.addEventListener('load', () => {
+  const bar = document.getElementById('t-bar-fill');
+  if(bar) bar.style.width = '100%';
+  
+  setTimeout(() => {
+    document.getElementById('t-overlay').style.opacity = '0';
+    setTimeout(() => {
+      document.getElementById('t-overlay').classList.add('hide');
+    }, 400);
+  }, 1000);
+});
+
+// Funções do Menu Mobile
+function openMobMenu() { document.getElementById('mob-menu').style.display = 'flex'; }
+function closeMobMenu() { document.getElementById('mob-menu').style.display = 'none'; }
+
+// Inicialização
+function init() {
+  showPage('page-landing');
+}
 init();
-
-// Adicione aqui o restante das suas funções originais...
 </script>
-
 </body>
 </html>
