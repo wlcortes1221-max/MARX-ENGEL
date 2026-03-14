@@ -1,7 +1,7 @@
-// Marx Engel Team — Service Worker
-const CACHE = 'met-v1';
+// Marx Engel Team — Service Worker (CORRIGIDO)
+const CACHE = 'met-v2';
 const ASSETS = [
-  './marx-engel-supabase.html',
+  './index.html',  // CORRIGIDO: era marx-engel-supabase.html (arquivo inexistente)
   'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap',
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
 ];
@@ -29,13 +29,15 @@ self.addEventListener('activate', e => {
 // Estratégia: Network first, fallback para cache
 self.addEventListener('fetch', e => {
   // Ignora requests do Supabase (sempre precisa de rede)
-  if(e.request.url.includes('supabase.co')) return;
+  if (e.request.url.includes('supabase.co')) return;
+  // Ignora requests que não sejam GET
+  if (e.request.method !== 'GET') return;
 
   e.respondWith(
     fetch(e.request)
       .then(res => {
         // Salva no cache se for bem sucedido
-        if(res && res.status === 200 && res.type === 'basic') {
+        if (res && res.status === 200 && res.type === 'basic') {
           const clone = res.clone();
           caches.open(CACHE).then(cache => cache.put(e.request, clone));
         }
@@ -45,7 +47,7 @@ self.addEventListener('fetch', e => {
   );
 });
 
-// Notificações push (base para futuro)
+// Notificações push
 self.addEventListener('push', e => {
   const data = e.data ? e.data.json() : {};
   self.registration.showNotification(data.title || 'Marx Engel Team', {
@@ -59,5 +61,5 @@ self.addEventListener('push', e => {
 
 self.addEventListener('notificationclick', e => {
   e.notification.close();
-  e.waitUntil(clients.openWindow('./marx-engel-supabase.html'));
+  e.waitUntil(clients.openWindow('./index.html')); // CORRIGIDO
 });
