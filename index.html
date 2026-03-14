@@ -16,8 +16,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- PERFORMANCE: CORRIGIDO — defer para não bloquear parsing do HTML -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<!-- Supabase deve carregar de forma síncrona para estar disponível no DOMContentLoaded -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root {
@@ -1054,25 +1054,12 @@ footer{padding:36px 60px;border-top:1px solid rgba(201,168,76,0.08);display:flex
 <script>
 // ============ SUPABASE ============
 // NOTA: Chave anon é pública por design do Supabase.
-// SEGURANÇA REAL: Ativar Row Level Security (RLS) no painel do Supabase.
-// Veja o arquivo rls-policies.sql para as políticas necessárias.
-let db = null;
-
-function initSupabase() {
-  if (typeof supabase === 'undefined') {
-    setTimeout(initSupabase, 100);
-    return;
-  }
-  const { createClient } = supabase;
-  db = createClient(
-    'https://rwkdppwvkvydoltalimc.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3a2RwcHd2a3Z5ZG9sdGFsaW1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5ODY2NDgsImV4cCI6MjA4ODU2MjY0OH0.CdMe5RCXADM66SOGNp3WoSM_EFP9gWyAdBB4SPos7k0'
-  );
-  init();
-}
-
-// CORRIGIDO: aguarda defer carregar antes de usar
-document.addEventListener('DOMContentLoaded', initSupabase);
+// SEGURANÇA REAL: ativar RLS no painel — veja rls-policies.sql
+const { createClient } = supabase;
+const db = createClient(
+  'https://rwkdppwvkvydoltalimc.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3a2RwcHd2a3Z5ZG9sdGFsaW1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5ODY2NDgsImV4cCI6MjA4ODU2MjY0OH0.CdMe5RCXADM66SOGNp3WoSM_EFP9gWyAdBB4SPos7k0'
+);
 
 // ============ STATE ============
 let cUser = null, cProfile = null;
@@ -1192,7 +1179,6 @@ function toggleForm(id) {
 
 // ============ AUTH ============
 async function fazerLogin() {
-  if (!db) { notify('Sistema ainda carregando, aguarde...', false); return; }
   const email=document.getElementById('l-email').value.trim();
   const senha=document.getElementById('l-senha').value;
   const btn=document.getElementById('btn-entrar');
@@ -1217,20 +1203,13 @@ async function loadProfile(user) {
   cUser=user;
   let {data:p, error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();
 
-  // CORRIGIDO: erro tratado explicitamente
-  if(error && error.code !== 'PGRST116') {
-    notify('Erro ao carregar perfil. Verifique sua conexão.', false);
-    hideOverlay();
-    return;
-  }
-
   if(!p) {
     const nome=user.user_metadata?.nome||user.email.split('@')[0];
-    // CORRIGIDO: role padrão sempre 'aluno', nunca 'professor'
+    // CORRIGIDO: role padrão sempre 'aluno'
     const {data:novo, error:errInsert}=await db.from('profiles')
       .insert({id:user.id,nome,email:user.email,role:'aluno'})
       .select().single();
-    if(errInsert){ notify('Erro ao criar perfil.', false); hideOverlay(); return; }
+    if(errInsert){ notify('Erro ao criar perfil: '+errInsert.message, false); hideOverlay(); return; }
     p=novo;
   }
 
@@ -2043,7 +2022,6 @@ document.addEventListener('click',e=>{
 
 // ============ INIT ============
 async function init() {
-  if(!db){return;}
   showOverlay();
   const ds=new Date().toLocaleDateString('pt-BR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   ['d-date','d-date-p'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=ds;});
@@ -2057,6 +2035,8 @@ async function init() {
     hideOverlay();
   }
 }
+
+init();
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&document.getElementById('page-login').classList.contains('active'))fazerLogin();
